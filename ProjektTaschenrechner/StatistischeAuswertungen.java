@@ -2,6 +2,7 @@ package ProjektTaschenrechner;
 
 public class StatistischeAuswertungen {
 
+
     public static double arithMittel(double[] ArithArray){
         double arithM = 0;
         for (int i = 0; i < ArithArray.length; i++) {
@@ -39,5 +40,9 @@ public class StatistischeAuswertungen {
         s= Math.sqrt(varianz(AbweichungArray));
         return s;
     }
+
+
+
+
 
 }
