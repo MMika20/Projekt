@@ -38,7 +38,7 @@ public class StatistischeAuswertungen {
     }
     /** ////////////////////////////////////////////////////////////////////////   Minimale Abweichung **/
     public static double minimaleAbweichung(double[] minAbwArray) {
-        double minAbweichung = 0.0; // Deklaration der minimalen Abweichung
+        double minAbweichung = minAbwArray[0]; // Deklaration der minimalen Abweichung
         for (int i = 1; i < minAbwArray.length; i++) {  // Formelbedingung
             double abweichung = Math.abs(minAbwArray[i] - minAbwArray[i-1]);    // Rechnung (Betrag)
             if (abweichung < minAbweichung) {   // wenn abweichung kleiner als maximale Abweichung
