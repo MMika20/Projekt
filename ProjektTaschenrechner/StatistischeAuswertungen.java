@@ -1,5 +1,6 @@
 package ProjektTaschenrechner;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -61,9 +62,9 @@ public class StatistischeAuswertungen {
         for (double wert : geoArray) {  // Durchlaufen der werte
             zahl *= wert;               // Multipliziert alle werte aus dem Array
         }
-        double geoLösung = Math.pow(zahl, 1.0 / geoArray.length);   // Rechnung zahl^1/arraylänge
+        double geoLoesung = Math.pow(zahl, 1.0 / geoArray.length);   // Rechnung zahl^1/arraylänge
 
-        return geoLösung;   // Rückgabe der Lösung
+        return geoLoesung;   // Rückgabe der Lösung
     }
 
     /** ////////////////////////////////////////////////////////////////////////   Median **/
@@ -80,7 +81,7 @@ public class StatistischeAuswertungen {
     public static double modalwert(double[] modalwertArray) {
         HashMap<Double, Integer> werteZaehler = new HashMap<>();    // Erstellen der Hashmap
         int maxZahl = 0;                            // Initialisierung des maximalen Zähler
-        double modalwert = Double.NaN;              // und des Modalwerts selbst
+        double modalwert = 0;                       // und des Modalwerts selbst
         for (double wert : modalwertArray) {        // Durchlaufen der Werte
             int zaehler = werteZaehler.getOrDefault(wert, 0) + 1;   // Erhöht den Wert um 1
             werteZaehler.put(wert, zaehler);                                  // in der HashMap
@@ -105,5 +106,41 @@ public class StatistischeAuswertungen {
         double stndrdAbwei;   // Deklaration der standard Abweichung
         stndrdAbwei= Math.sqrt(varianz(AbweichungArray)); // Rechnung
         return stndrdAbwei;   // Rückgabe der standard Abweichung
+    }
+    /** ////////////////////////////////////////////////////////////////////////   1D Array **/
+    public static int[] readArrayInteger() throws IOException {
+        int[] zahlen;   //Deklaration
+        System.out.println("Wie viele Zahlen sollen erfasst werden");   //Größe abfragen
+        int groesse = Eingabe.readInteger();
+        zahlen = readArrayInteger(groesse);     //Array Initialisieren
+        return zahlen;
+    }
+
+    public static int[] readArrayInteger(int anzahl) throws IOException {
+        int[] zahlen = new int[anzahl];     //Deklaration
+        for (int i = 0; i < zahlen.length; i++) {
+            System.out.print("Bitte erfassen sie den Wert-" + (i + 1) + ": ");
+            zahlen[i] = Eingabe.readInteger();
+            System.out.println(" ");
+        }
+        return zahlen;
+    }
+
+    public static double[] readArrayDouble() throws IOException {
+        double[] zahlen;    //Deklaration
+        System.out.println("Wie viele Zahlen sollen erfasst werden");   //Größe abfragen
+        int groesse = Eingabe.readInteger();
+        zahlen = readArrayDouble(groesse);  //Array Initialisieren
+        return zahlen;
+    }
+
+    public static double[] readArrayDouble(int anzahl) throws IOException {
+        double[] zahlen = new double[anzahl];   //Deklaration
+        for (int i = 0; i < zahlen.length; i++) {
+            System.out.print("Bitte erfassen sie den Wert-" + (i + 1) + ": ");
+            zahlen[i] = Eingabe.readDouble();
+            System.out.println(" ");
+        }
+        return zahlen;
     }
 }
