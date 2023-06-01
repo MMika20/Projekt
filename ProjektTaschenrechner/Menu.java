@@ -1,6 +1,7 @@
 package ProjektTaschenrechner;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class Menu {
 
@@ -8,7 +9,7 @@ public class Menu {
 
     private void willkommensText() {
         System.out.println("Willkommen bei unserem Taschenrechner!");
-        System.out.println("Erklärtext");
+        System.out.println("Geben sie die jeweilige Zahl vor ihrer Rechnung die sie benutzen wollen ein.");
         System.out.println("Tippen sie help, wenn sie Hilfe brauchen");
         System.out.println(menuAuswahl());
     }
@@ -35,8 +36,7 @@ public class Menu {
         } else if (befehlswort.equals("quit")) {
             moechteBeenden = beenden(befehl);
         } else if (befehlswort.equals("1")) {
-            System.out.println("Wachstumsprozess");
-            System.out.println("Zerfallsprozess");
+            berechnungWachs();
         } else if (befehlswort.equals("2")) {
             System.out.println("Quadratische Gleichungen");
         } else if (befehlswort.equals("3")) {
@@ -54,21 +54,38 @@ public class Menu {
     }
 
     public void berechnungStat() throws IOException {
-        System.out.println("Statistische Auswertungen");
-        double[] statArr = StatistischeAuswertungen.readArrayDouble();
+        do {
+            DecimalFormat df = new DecimalFormat("#,##0.00 ");
+            System.out.println("Sie haben Statistische Auswertung gewählt!\nGeben sie nun bitte Ihre Zahlen ein!");
+            double[] statArr = StatistischeAuswertungen.readArrayDouble();
 
-        System.out.println("Maximum: " +StatistischeAuswertungen.ermittelMax(statArr));
-        System.out.println("Minimum: " +StatistischeAuswertungen.ermittelMin(statArr));
-        System.out.println("Spannweite: "+StatistischeAuswertungen.spannweite(statArr));
-        System.out.println("Max Abweichung: "+StatistischeAuswertungen.maximaleAbweichung(statArr));
-        System.out.println("Min Abweichung: "+StatistischeAuswertungen.minimaleAbweichung(statArr));
-        System.out.println("Durchschnitt: "+StatistischeAuswertungen.arithMittel(statArr));
-        System.out.println("Geometrisches Mittel: "+StatistischeAuswertungen.geoMittel(statArr));
-        System.out.println("Median: "+StatistischeAuswertungen.median(statArr));
-        System.out.println("Modalwert: "+StatistischeAuswertungen.modalwert(statArr));
-        System.out.println("Varianz: "+StatistischeAuswertungen.varianz(statArr));
-        System.out.println("Standardabweichung: "+StatistischeAuswertungen.standardAbweichung(statArr));
+            System.out.println("Maximum: " + StatistischeAuswertungen.ermittelMax(statArr));
+            System.out.println("Minimum: " + StatistischeAuswertungen.ermittelMin(statArr));
+            System.out.println("Spannweite: " + StatistischeAuswertungen.spannweite(statArr));
+            System.out.println("Max Abweichung: " + StatistischeAuswertungen.maximaleAbweichung(statArr));
+            System.out.println("Min Abweichung: " + StatistischeAuswertungen.minimaleAbweichung(statArr));
+            System.out.println("Durchschnitt: " + StatistischeAuswertungen.arithMittel(statArr));
+            System.out.println("Geometrisches Mittel: " + df.format(StatistischeAuswertungen.geoMittel(statArr)));
+            System.out.println("Median: " + StatistischeAuswertungen.median(statArr));
+            System.out.println("Modalwert: " + StatistischeAuswertungen.modalwert(statArr));
+            System.out.println("Varianz: " + StatistischeAuswertungen.varianz(statArr));
+            System.out.println("Standardabweichung: " + df.format(StatistischeAuswertungen.standardAbweichung(statArr)));
 
+            System.out.println("\nWollen sie nochmal eine Statische Auswertung berrechnen?\n[Ja/Nein]");
+        } while (Eingabe.readBoolean());
+    }
+
+    public void berechnungWachs() throws IOException {
+        do {
+            System.out.println("Sie haben Wachstums und Zerfallsprozesse gewählt!\nGeben sie nun bitte Ihre Zahlen ein!");
+            double wachsArr = WachstumsUndZerfallsprozesse.wachsWert();
+            double rateArr = WachstumsUndZerfallsprozesse.wachsRate();
+            double zeitArr = WachstumsUndZerfallsprozesse.zeitraum();
+
+            System.out.println("Wachstumsprozess: " + WachstumsUndZerfallsprozesse.Wachstum(wachsArr, rateArr, zeitArr));
+
+            System.out.println("\nWollen sie nochmal einen Wachstums und Zerfallprozess berrechnen?\n[Ja/Nein]");
+        } while (Eingabe.readBoolean());
     }
 
 
@@ -91,7 +108,7 @@ public class Menu {
             Befehl befehl = befehleEinlesen.liefereBefehl();
             beendet = verarbeiteBefehl(befehl);
         }
-        System.out.println("Danke für dieses Spiel! Auf Wiedersehen!");
+        System.out.println("Danke das sie unseren Taschenrechner benutzt haben. Auf Wiedersehen!");
     }
 
     private boolean beenden(Befehl befehl) {
@@ -100,6 +117,9 @@ public class Menu {
 
 
     private void hilfstextAusgeben() {
+        System.out.println("Um den Taschnrechner zu bedienen müssen sie bloß,\ndie Zahl die vor der Rechnung steht eingeben");
+        System.out.println("Wenn sie den Taschenrechner beeneden wollen, müssen sie [quit] eingeben");
+        System.out.println("Die gültigen Befehle sind: ");
         System.out.println(befehleEinlesen.getAlleBefehle());
     }
 }

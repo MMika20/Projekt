@@ -128,18 +128,19 @@ public class StatistischeAuswertungen {
 
     public static double[] readArrayDouble() throws IOException {
         double[] zahlen;    //Deklaration
-        System.out.println("Wie viele Zahlen sollen erfasst werden");   //Größe abfragen
+        System.out.print("Wie viele Zahlen sollen erfasst werden?\n> ");   //Größe abfragen
         int groesse = Eingabe.readInteger();
         zahlen = readArrayDouble(groesse);  //Array Initialisieren
         return zahlen;
     }
 
     public static double[] readArrayDouble(int anzahl) throws IOException {
+        System.out.println();
         double[] zahlen = new double[anzahl];   //Deklaration
         for (int i = 0; i < zahlen.length; i++) {
             System.out.print("Bitte erfassen sie den Wert-" + (i + 1) + ": ");
             zahlen[i] = Eingabe.readDouble();
-            System.out.println(" ");
+            System.out.print("");
         }
         return zahlen;
     }

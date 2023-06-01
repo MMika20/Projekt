@@ -5,7 +5,7 @@ public class Befehlswoerter {
     // ein konstantes Array mit den gültigen Befehlswörtern
 
     private static final String[] gueltigeBefehle = {
-            "help", "1", "2", "3", "4", "5"
+            "help", "1", "2", "3", "4", "5", "quit"
     };
 
     public boolean istBefehl(String eingabe)
